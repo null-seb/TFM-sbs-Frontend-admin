@@ -44,6 +44,34 @@ export const constantRoutes = [
   },
 
   {
+    path: '/college',
+    component: Layout,
+    redirect: '/college/list',
+    name: 'College',
+    meta: { title: 'College Management' },
+    children: [
+      {
+        path: 'list',
+        name: 'CollegeList',
+        component: () => import('@/views/college/list'),
+        meta: { title: 'College list' }
+      },
+      {
+        path: 'create',
+        name: 'CollegeCreate',
+        component: () => import('@/views/college/form'),
+        meta: { title: 'Create college' }
+      },
+      {
+        path: 'edit/:id',
+        name: 'CollegeEdit',
+        component: () => import('@/views/college/form'),
+        meta: { title: 'Edit college' },
+        hidden: true
+      }
+    ]
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',

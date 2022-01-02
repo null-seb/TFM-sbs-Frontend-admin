@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'SBS Content Manage System',
 
   /**
    * @type {boolean} true | false
