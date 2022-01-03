@@ -7,5 +7,12 @@ export default {
       url: '/edu/college/list',
       method: 'get'
     })
+  },
+  pageList(page, limit, searchObj) {
+    return request({
+      url: `/edu/college/list/${page}/${limit}`,
+      method: 'get',
+      params: searchObj
+    })
   }
 }
