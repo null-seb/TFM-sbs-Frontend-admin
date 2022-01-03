@@ -14,5 +14,11 @@ export default {
       method: 'get',
       params: searchObj
     })
+  },
+  removeById(id) {
+    return request({
+      url: `/edu/college/remove/${id}`,
+      method: 'delete'
+    })
   }
 }
