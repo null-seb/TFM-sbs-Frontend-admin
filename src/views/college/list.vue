@@ -51,7 +51,7 @@
       <el-table-column prop="intro" label="Introduction" />
       <el-table-column prop="sort" label="Sort" width="60" />
       <el-table-column prop="joinDate" label="JoinDate" width="160" />
-      <el-table-column label="操作" width="200" align="center">
+      <el-table-column label="Operation" width="200" align="center">
         <template slot-scope="scope">
           <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeById(scope.row.id)">Delete</el-button>
         </template>

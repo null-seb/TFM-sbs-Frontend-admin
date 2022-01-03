@@ -20,5 +20,12 @@ export default {
       url: `/edu/college/remove/${id}`,
       method: 'delete'
     })
+  },
+  save(college) {
+    return request({
+      url: '/edu/college/save',
+      method: 'post',
+      data: college
+    })
   }
 }
