@@ -44,13 +44,21 @@
       <el-table-column prop="name" label="Name" width="80" />
       <el-table-column label="ranking" width="90">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.level === 1" type="success" size="mini">Top500</el-tag>
-          <el-tag v-if="scope.row.level === 2" size="mini">Top50</el-tag>
+          <el-tag v-if="scope.row.level === 1" size="mini">Top500</el-tag>
+          <el-tag v-if="scope.row.level === 2" type="success" size="mini">Top50</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="intro" label="Introduction" />
       <el-table-column prop="sort" label="Sort" width="60" />
       <el-table-column prop="joinDate" label="JoinDate" width="160" />
+      <el-table-column label="Operation" width="200" align="center">
+        <template slot-scope="scope">
+          <router-link :to="'/college/edit/'+scope.row.id">
+            <el-button type="primary" size="mini" icon="el-icon-edit">Edit</el-button>
+          </router-link>
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeById(scope.row.id)">Delete</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <!-- 分页组件 -->
     <el-pagination
@@ -107,6 +115,26 @@ export default {
     resetData() {
       this.searchObj = {}
       this.fetchData()
+    },
+    // 根据id删除数据
+    removeById(id) {
+      this.$confirm('This operation will permanently delete the record, do you want to continue?', 'Warning', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(() => {
+        return collegeApi.removeById(id)
+      }).then((response) => {
+        this.fetchData()
+        this.$message.success(response.message)
+      }).catch(error => {
+        console.log('error', error)
+        // 当取消时会进入catch语句:error = 'cancel'
+        // 当后端服务抛出异常时：error = 'error'
+        if (error === 'cancel') {
+          this.$message.info('Cancel delete')
+        }
+      })
     }
   }
 }
