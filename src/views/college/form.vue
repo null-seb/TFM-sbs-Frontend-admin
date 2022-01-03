@@ -49,18 +49,43 @@ export default {
       saveBtnDisabled: false // 保存按钮是否禁用，防止表单重复提交
     }
   },
+  created() {
+    if (this.$route.params.id) {
+      this.fetchDataById(this.$route.params.id)
+    }
+  },
   methods: {
 
     saveOrUpdate() {
       // 禁用保存按钮
       this.saveBtnDisabled = true
-      this.saveData()
+      if (!this.college.id) {
+        this.saveData()
+      } else {
+        this.updateData()
+      }
     },
 
     // 新增学校
     saveData() {
       // debugger
       collegeApi.save(this.college).then(response => {
+        this.$message({
+          type: 'success',
+          message: response.message
+        })
+        this.$router.push({ path: '/college' })
+      })
+    },
+    // 根据id查询记录
+    fetchDataById(id) {
+      collegeApi.getById(id).then(response => {
+        this.college = response.data.item
+      })
+    },
+    updateData() {
+      // teacher数据的获取
+      collegeApi.updateById(this.college).then(response => {
         this.$message({
           type: 'success',
           message: response.message

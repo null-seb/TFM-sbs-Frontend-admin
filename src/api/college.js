@@ -27,5 +27,18 @@ export default {
       method: 'post',
       data: college
     })
+  },
+  getById(id) {
+    return request({
+      url: `/edu/college/get/${id}`,
+      method: 'get'
+    })
+  },
+  updateById(college) {
+    return request({
+      url: '/edu/college/update',
+      method: 'put',
+      data: college
+    })
   }
 }

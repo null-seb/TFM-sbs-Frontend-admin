@@ -53,6 +53,9 @@
       <el-table-column prop="joinDate" label="JoinDate" width="160" />
       <el-table-column label="Operation" width="200" align="center">
         <template slot-scope="scope">
+          <router-link :to="'/college/edit/'+scope.row.id">
+            <el-button type="primary" size="mini" icon="el-icon-edit">Edit</el-button>
+          </router-link>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeById(scope.row.id)">Delete</el-button>
         </template>
       </el-table-column>
