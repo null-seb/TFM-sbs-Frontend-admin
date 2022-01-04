@@ -28,6 +28,18 @@
         <el-input v-model="college.career" :rows="10" type="textarea" />
       </el-form-item>
       <!-- 学校头像 -->
+      <el-form-item label="学校头像">
+        <el-upload
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+          class="avatar-uploader"
+          action="http://localhost:8120/oss/file/upload?module=avatar"
+        >
+          <img v-if="college.avatar" :src="college.avatar" alt="">
+          <i v-else class="el-icon-plus avatar-uploader-icon" />
+        </el-upload>
+      </el-form-item>
 
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate()">Save</el-button>
@@ -77,14 +89,16 @@ export default {
         this.$router.push({ path: '/college' })
       })
     },
+
     // 根据id查询记录
     fetchDataById(id) {
       collegeApi.getById(id).then(response => {
         this.college = response.data.item
       })
     },
+
     updateData() {
-      // teacher数据的获取
+      // college数据的获取
       collegeApi.updateById(this.college).then(response => {
         this.$message({
           type: 'success',
@@ -92,11 +106,55 @@ export default {
         })
         this.$router.push({ path: '/college' })
       })
+    },
+
+    // 上传成功回调
+    handleAvatarSuccess(res) {
+      // console.log(res)
+      this.college.avatar = res.data.url
+      // 强制重新渲染
+      this.$forceUpdate()
+    },
+
+    // 上传校验
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+
+      if (!isJPG) {
+        this.$message.error('The uploaded photos can only be in jpg format!')
+      }
+      if (!isLt2M) {
+        this.$message.error('Upload avatar image size cannot exceed 2MB!')
+      }
+      return isJPG && isLt2M
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader .avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar-uploader img {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
 </style>
