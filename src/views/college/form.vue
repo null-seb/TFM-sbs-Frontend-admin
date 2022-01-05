@@ -32,6 +32,7 @@
         <el-upload
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
+          :on-error="handleAvatarError"
           :before-upload="beforeAvatarUpload"
           class="avatar-uploader"
           action="http://localhost:8120/oss/file/upload?module=avatar"
@@ -50,6 +51,7 @@
 
 <script>
 import collegeApi from '@/api/college'
+
 export default {
   data() {
     return {
@@ -110,10 +112,21 @@ export default {
 
     // 上传成功回调
     handleAvatarSuccess(res) {
-      // console.log(res)
-      this.college.avatar = res.data.url
-      // 强制重新渲染
-      this.$forceUpdate()
+      console.log(res)
+      if (res.success) {
+        // console.log(res)
+        this.college.avatar = res.data.url
+        // 强制重新渲染
+        this.$forceUpdate()
+      } else {
+        this.$message.error('Upload failed （!20000）')
+      }
+    },
+
+    // 错误处理
+    handleAvatarError() {
+      console.log('error')
+      this.$message.error('Upload failed（http failed）')
     },
 
     // 上传校验
@@ -141,9 +154,11 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
 .avatar-uploader .el-upload:hover {
   border-color: #409EFF;
 }
+
 .avatar-uploader .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
@@ -152,6 +167,7 @@ export default {
   line-height: 178px;
   text-align: center;
 }
+
 .avatar-uploader img {
   width: 178px;
   height: 178px;
