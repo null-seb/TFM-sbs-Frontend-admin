@@ -71,6 +71,28 @@ export const constantRoutes = [
       }
     ]
   },
+  // 课程分类管理
+  {
+    path: '/subject',
+    component: Layout,
+    redirect: '/subject/list',
+    name: 'Subject',
+    meta: { title: 'Subject Category' },
+    children: [
+      {
+        path: 'list',
+        name: 'SubjectList',
+        component: () => import('@/views/subject/list'),
+        meta: { title: 'Subject Category List' }
+      },
+      {
+        path: 'import',
+        name: 'SubjectImport',
+        component: () => import('@/views/subject/import'),
+        meta: { title: 'Import Subject Category' }
+      }
+    ]
+  },
   {
     path: '/',
     component: Layout,
