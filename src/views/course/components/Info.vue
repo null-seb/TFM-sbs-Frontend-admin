@@ -8,7 +8,19 @@
         <el-input v-model="courseInfo.title" placeholder=" 示例：机器学习项目课：从基础到搭建项目视频课程。专业名称注意大小写" />
       </el-form-item>
 
-      <!-- 课程学校 TODO -->
+      <el-form-item label="课程讲师">
+        <el-select
+          v-model="courseInfo.collegeId"
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="college in collegeList"
+            :key="college.id"
+            :label="college.name"
+            :value="college.id"
+          />
+        </el-select>
+      </el-form-item>
 
       <!-- 所属分类 TODO -->
 
@@ -32,7 +44,7 @@
 
 <script>
 import courseApi from '@/api/course'
-
+import collegeApi from '@/api/college'
 export default {
   data() {
     return {
@@ -46,8 +58,13 @@ export default {
         subjectParentId: '',
         cover: '',
         description: ''
-      }
+      },
+      collegeList: []
     }
+  },
+
+  created() {
+    this.initTeacherList()
   },
 
   methods: {
@@ -63,6 +80,12 @@ export default {
         this.$message.success(response.message)
         this.$parent.courseId = response.data.courseId // 获取courseId
         this.$parent.active = 1// 下一步
+      })
+    },
+
+    initTeacherList() {
+      collegeApi.list().then(response => {
+        this.collegeList = response.data.items
       })
     }
   }
