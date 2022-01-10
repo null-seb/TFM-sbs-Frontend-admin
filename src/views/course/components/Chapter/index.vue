@@ -4,8 +4,8 @@
     <!-- 章节列表 TODO -->
 
     <div style="text-align:center">
-      <el-button type="primary" @click="prev()">上一步</el-button>
-      <el-button type="primary" @click="next()">下一步</el-button>
+      <el-button type="primary" @click="prev()">Previous</el-button>
+      <el-button type="primary" @click="next()">Next</el-button>
     </div>
   </div>
 </template>

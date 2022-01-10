@@ -4,7 +4,7 @@
     <!-- 课程信息表单 -->
     <el-form label-width="120px">
       <el-form-item label="Course Title">
-        <el-input v-model="courseInfo.title" placeholder=" 示例：机器学习项目课：从基础到搭建项目视频课程。专业名称注意大小写" />
+        <el-input v-model="courseInfo.title" placeholder=" Example: Machine learning project course: from the basics to building a project video course. Note the case of the professional name." />
       </el-form-item>
 
       <el-form-item label="College">
@@ -22,7 +22,7 @@
       </el-form-item>
 
       <!-- 所属分类：级联下拉列表 -->
-      <el-form-item label="Course Categories">
+      <el-form-item label="Categories">
         <!-- 一级分类 -->
         <el-select
           v-model="courseInfo.subjectParentId"
@@ -48,7 +48,7 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="总课时">
+      <el-form-item label="Lesson time">
         <el-input-number v-model="courseInfo.lessonNum" :min="0" controls-position="right" placeholder="Total number of hours" />
       </el-form-item>
 

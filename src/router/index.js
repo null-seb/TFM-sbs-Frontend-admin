@@ -99,25 +99,25 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/course/list',
     name: 'Course',
-    meta: { title: '课程管理' },
+    meta: { title: 'Course' },
     children: [
       {
         path: 'list',
         name: 'CourseList',
         component: () => import('@/views/course/list'),
-        meta: { title: '课程列表' }
+        meta: { title: 'Course List' }
       },
       {
         path: 'info',
         name: 'CourseInfo',
         component: () => import('@/views/course/form'),
-        meta: { title: '发布课程' }
+        meta: { title: 'Publish Course' }
       },
       {
         path: 'info/:id',
         name: 'CourseInfoEdit',
         component: () => import('@/views/course/form'),
-        meta: { title: '编辑课程' },
+        meta: { title: 'Edit Course' },
         hidden: true
       },
       {

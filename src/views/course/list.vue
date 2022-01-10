@@ -5,10 +5,10 @@
 
       <!-- 所属分类：级联下拉列表 -->
       <!-- 一级分类 -->
-      <el-form-item label="课程类别">
+      <el-form-item label="Category">
         <el-select
           v-model="searchObj.subjectParentId"
-          placeholder="请选择"
+          placeholder="Select"
           @change="subjectLevelOneChanged"
         >
           <el-option
@@ -20,7 +20,7 @@
         </el-select>
 
         <!-- 二级分类 -->
-        <el-select v-model="searchObj.subjectId" placeholder="请选择">
+        <el-select v-model="searchObj.subjectId" placeholder="Select">
           <el-option
             v-for="subject in subjectLevelTwoList"
             :key="subject.id"
@@ -32,13 +32,13 @@
 
       <!-- 标题 -->
       <el-form-item>
-        <el-input v-model="searchObj.title" placeholder="课程标题" />
+        <el-input v-model="searchObj.title" placeholder="Course Title" />
       </el-form-item>
       <!-- 讲师 -->
       <el-form-item>
         <el-select
           v-model="searchObj.collegeId"
-          placeholder="请选择讲师"
+          placeholder="Select College"
         >
           <el-option
             v-for="college in collegeList"
@@ -49,8 +49,8 @@
         </el-select>
       </el-form-item>
 
-      <el-button type="primary" icon="el-icon-search" @click="fetchData()">查询</el-button>
-      <el-button type="default" @click="resetData()">清空</el-button>
+      <el-button type="primary" icon="el-icon-search" @click="fetchData()">Search</el-button>
+      <el-button type="default" @click="resetData()">Empty</el-button>
     </el-form>
 
     <!-- 表格 -->
@@ -62,37 +62,37 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="封面" width="200" align="center">
+      <el-table-column label="Cover" width="200" align="center">
         <template slot-scope="scope">
           <img :src="scope.row.cover" alt="scope.row.title" width="100%">
         </template>
       </el-table-column>
-      <el-table-column label="课程信息">
+      <el-table-column label="Course Info">
         <template slot-scope="scope">
           <a href="">{{ scope.row.title }}</a>
           <p>
-            分类：{{ scope.row.subjectParentTitle }} > {{ scope.row.subjectTitle }}
+            Category：{{ scope.row.subjectParentTitle }} > {{ scope.row.subjectTitle }}
           </p>
           <p>
-            课时：{{ scope.row.lessonNum }} /
-            浏览：{{ scope.row.viewCount }} /
-            付费学员：{{ scope.row.buyCount }}
+            Lesson：{{ scope.row.lessonNum }} /
+            View：{{ scope.row.viewCount }} /
+            Learners Num：{{ scope.row.buyCount }}
           </p>
         </template>
       </el-table-column>
-      <el-table-column label="讲师" width="100" align="center">
+      <el-table-column label="College" width="100" align="center">
         <template slot-scope="scope">
           {{ scope.row.collegeName }}
         </template>
       </el-table-column>
-      <el-table-column label="价格(元)" width="100" align="center">
+      <el-table-column label="Price(Euro)" width="100" align="center">
         <template slot-scope="scope">
           <!-- {{ typeof '0' }}  {{ typeof 0 }} {{ '0' == 0 }} -->
           <!-- {{ typeof scope.row.price }}
           {{ typeof Number(scope.row.price) }}
           {{ typeof Number(scope.row.price).toFixed(2) }} -->
 
-          <el-tag v-if="Number(scope.row.price) === 0" type="success">免费</el-tag>
+          <el-tag v-if="Number(scope.row.price) === 0" type="success">Free</el-tag>
 
           <!-- 前端解决保留两位小数的问题 -->
           <!-- <el-tag v-else>{{ Number(scope.row.price).toFixed(2) }}</el-tag> -->
@@ -101,26 +101,26 @@
           <el-tag v-else>{{ scope.row.price }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="status" label="课程状态" width="100" align="center">
+      <el-table-column prop="status" label="Status" width="100" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status === 'Draft' ? 'warning' : 'success'">{{ scope.row.status === 'Draft' ? '未发布' : '已发布' }}</el-tag>
+          <el-tag :type="scope.row.status === 'Draft' ? 'warning' : 'success'">{{ scope.row.status === 'Draft' ? 'Unpublished' : 'Published' }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" width="120" align="center">
+      <el-table-column label="CreateTime" width="120" align="center">
         <template slot-scope="scope">
           {{ scope.row.gmtCreate.substr(0, 10) }}
         </template>
       </el-table-column>
 
-      <el-table-column label="操作" width="300" align="center">
+      <el-table-column label="Operation" width="300" align="center">
         <template slot-scope="scope">
           <router-link :to="'/course/info/'+scope.row.id">
-            <el-button type="primary" size="mini" icon="el-icon-edit">修改</el-button>
+            <el-button type="primary" size="mini" icon="el-icon-edit">Edit</el-button>
           </router-link>
           <router-link :to="'/course/chapter/'+scope.row.id">
             <el-button type="primary" size="mini" icon="el-icon-edit">编辑大纲</el-button>
           </router-link>
-          <el-button type="text" size="mini" icon="el-icon-delete" @click="removeById(scope.row.id)">删除</el-button>
+          <el-button type="text" size="mini" icon="el-icon-delete" @click="removeById(scope.row.id)">Delete</el-button>
         </template>
       </el-table-column>
     </el-table>

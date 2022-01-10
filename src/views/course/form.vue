@@ -1,11 +1,11 @@
 <template>
   <div class="app-container">
 
-    <h2 style="text-align: center;">发布新课程</h2>
+    <h2 style="text-align: center;">Create new course</h2>
     <el-steps :active="active" finish-status="success" simple style="margin-bottom: 40px">
-      <el-step title="填写课程基本信息" />
-      <el-step title="创建课程大纲" />
-      <el-step title="发布课程" />
+      <el-step title="Course Basic Information" />
+      <el-step title="Create Course Outline" />
+      <el-step title="Posting Courses" />
     </el-steps>
 
     <!-- 填写课程基本信息 -->
