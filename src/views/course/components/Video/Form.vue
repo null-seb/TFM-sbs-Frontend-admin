@@ -18,6 +18,8 @@
       <el-form-item label="Video upload">
         <el-upload
           ref="upload"
+          :before-remove="handleBeforeRemove"
+          :on-remove="handleOnRemove"
           :auto-upload="false"
           :on-success="handleUploadSuccess"
           :on-error="handleUploadError"
@@ -46,6 +48,7 @@
 
 <script>
 import videoApi from '@/api/video'
+import vodApi from '@/api/vod'
 export default {
 
   data() {
@@ -140,6 +143,23 @@ export default {
     handleUploadError() {
       this.uploadBtnDisabled = false
       this.$message.error('UploadFailed2')
+    },
+    // 删除视频文件确认
+    handleBeforeRemove(file, fileList) {
+      return this.$confirm(`Delete ${file.name}？`)
+    },
+
+    // 执行视频文件的删除
+    handleOnRemove(file, fileList) {
+      if (!this.video.videoSourceId) {
+        return
+      }
+      vodApi.removeByVodId(this.video.videoSourceId).then(response => {
+        this.video.videoSourceId = ''
+        this.video.videoOriginalName = ''
+        videoApi.updateById(this.video)
+        this.$message.success(response.message)
+      })
     }
   }
 }
