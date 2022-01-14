@@ -129,6 +129,57 @@ export const constantRoutes = [
       }
     ]
   },
+  // 内容管理
+  {
+    path: '/ad',
+    component: Layout,
+    redirect: '/ad/list',
+    name: 'Ad',
+    meta: { title: 'Content Management' },
+    children: [
+      {
+        path: 'list',
+        name: 'AdList',
+        component: () => import('@/views/ad/list'),
+        meta: { title: 'Ad Recommendation' }
+      },
+      {
+        path: 'create',
+        name: 'AdCreate',
+        component: () => import('@/views/ad/form'),
+        meta: { title: 'Create Ad' },
+        hidden: true
+      },
+      {
+        path: 'edit/:id',
+        name: 'AdEdit',
+        component: () => import('@/views/ad/form'),
+        meta: { title: 'Edit Ad' },
+        hidden: true
+      },
+
+      {
+        path: 'type-list',
+        name: 'AdTypeList',
+        component: () => import('@/views/adType/list'),
+        meta: { title: 'Recommended Position' }
+      },
+      {
+        path: 'type-create',
+        name: 'AdTypeCreate',
+        component: () => import('@/views/adType/form'),
+        meta: { title: 'Create AdType' },
+        hidden: true
+      },
+      {
+        path: 'type-edit/:id',
+        name: 'AdTypeEdit',
+        component: () => import('@/views/adType/form'),
+        meta: { title: 'Edit AdType' },
+        hidden: true
+      }
+    ]
+  },
   {
     path: '/',
     component: Layout,
