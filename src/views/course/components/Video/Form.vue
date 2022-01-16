@@ -26,7 +26,7 @@
           :on-exceed="handleUploadExceed"
           :file-list="fileList"
           :limit="1"
-          action="http://127.0.0.1:8130/vod/media/upload"
+          action="http://127.0.0.1:9110/vod/media/upload"
         >
           <el-button slot="trigger" size="small" type="primary">Choose video</el-button>
           <el-button
