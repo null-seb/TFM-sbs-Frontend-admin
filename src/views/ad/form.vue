@@ -30,7 +30,7 @@
           :before-upload="beforeAvatarUpload"
           :limit="1"
           :file-list="fileList"
-          action="http://localhost:8120/oss/file/upload?module=ad"
+          action="http://127.0.0.1:9110/oss/file/upload?module=ad"
           list-type="picture"
         >
           <el-button size="small" type="primary">Choose</el-button>
