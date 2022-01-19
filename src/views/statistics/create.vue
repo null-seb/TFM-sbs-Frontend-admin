@@ -3,18 +3,20 @@
     <!--表单-->
     <el-form :inline="true" class="demo-form-inline">
 
-      <el-form-item label="日期">
+      <el-form-item label="Date">
         <el-date-picker
           v-model="day"
           type="date"
-          placeholder="选择要统计的日期"
-          value-format="yyyy-MM-dd" />
+          placeholder="Choose Date"
+          value-format="yyyy-MM-dd"
+        />
       </el-form-item>
 
       <el-button
         :disabled="btnDisabled"
         type="primary"
-        @click="genarateData()">生成</el-button>
+        @click="genarateData()"
+      >生成</el-button>
     </el-form>
 
   </div>
@@ -35,7 +37,7 @@ export default {
       this.btnDisabled = true
       statisticsApi.createStatistics(this.day).then(response => {
         this.btnDisabled = false
-        this.$message.success('生成成功')
+        this.$message.success('Successfully')
       })
     }
   }
